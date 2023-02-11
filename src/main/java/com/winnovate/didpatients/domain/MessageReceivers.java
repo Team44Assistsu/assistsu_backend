@@ -1,15 +1,13 @@
 package com.winnovate.didpatients.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "MESSAGE_RECEIVERS")
@@ -20,13 +18,13 @@ public class MessageReceivers {
 	@Column(name = "MSG_RCVR_ID")
 	private Integer messageReceiversId;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "MSG_ID")
 	private Message message;
 	
-	@OneToMany
-	@JoinColumn(name = "ALTER_ID")
-	private Integer receiver;
+	@ManyToOne
+	@JoinColumn(name = "TO_ALTER_ID")
+	private Alter to;
 	
 	@Column(name = "IS_READ")
 	private boolean isRead;
@@ -47,12 +45,12 @@ public class MessageReceivers {
 		this.message = message;
 	}
 
-	public Integer getReceiver() {
-		return receiver;
+	public Alter getTo() {
+		return to;
 	}
 
-	public void setReceiver(Integer receiver) {
-		this.receiver = receiver;
+	public void setTo(Alter to) {
+		this.to = to;
 	}
 
 	public boolean isRead() {

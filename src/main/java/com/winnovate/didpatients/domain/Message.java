@@ -3,14 +3,15 @@ package com.winnovate.didpatients.domain;
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "MESSAGE")
@@ -21,8 +22,9 @@ public class Message {
 	@Column(name = "MESSAGE_ID")
 	private Integer messageId;
 	
-	@Column(name = "FROM_ALTER_ID")
-	private Integer from;
+	@OneToOne
+	@JoinColumn(name = "FROM_ALTER_ID")
+	private Alter from;
 	
 	@Column(name = "TEXT")
 	private String text;
@@ -31,7 +33,7 @@ public class Message {
 	private Date date;
 	
 	@OneToMany(mappedBy="message")
-	private List<Integer> receivers;
+	private List<MessageReceivers> receivers;
 
 	public Integer getMessageId() {
 		return messageId;
@@ -41,12 +43,11 @@ public class Message {
 		this.messageId = messageId;
 	}
 
-	
-	public Integer getFrom() {
+	public Alter getFrom() {
 		return from;
 	}
 
-	public void setFrom(Integer from) {
+	public void setFrom(Alter from) {
 		this.from = from;
 	}
 
@@ -66,11 +67,11 @@ public class Message {
 		this.date = date;
 	}
 
-	public List<Integer> getReceivers() {
+	public List<MessageReceivers> getReceivers() {
 		return receivers;
 	}
 
-	public void setReceivers(List<Integer> receivers) {
+	public void setReceivers(List<MessageReceivers> receivers) {
 		this.receivers = receivers;
 	}
 }

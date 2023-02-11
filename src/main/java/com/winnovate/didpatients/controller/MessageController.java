@@ -1,30 +1,51 @@
 package com.winnovate.didpatients.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.winnovate.didpatients.model.AlterRequest;
 import com.winnovate.didpatients.model.MessageRequest;
-import com.winnovate.didpatients.response.AlterResponse;
+import com.winnovate.didpatients.response.Message;
+import com.winnovate.didpatients.response.MessageResponse;
 import com.winnovate.didpatients.service.MessageService;
 
 @RestController
 public class MessageController {
-	
+
 	@Autowired
 	MessageService service;
 
 	@PostMapping("/sendMessage")
-	public ResponseEntity<String> sendMessage(@RequestBody MessageRequest request) {
+	public ResponseEntity<MessageResponse> sendMessage(@RequestBody MessageRequest request) {
 
-//		AlterResponse alter = service.sendMessage(request);
+		MessageResponse messageResponse = service.sendMessage(request);
 
-//		return new ResponseEntity<>(alter, HttpStatusCode.valueOf(200));
-		
-		return new ResponseEntity<String>("Message sent", HttpStatusCode.valueOf(200));
+		return new ResponseEntity<>(messageResponse, HttpStatusCode.valueOf(200));
+
+	}
+	
+	@GetMapping("/viewMessage")
+	public ResponseEntity<Message> sendMessage(@RequestHeader("messageId") Integer messageId, @RequestHeader("alterId") Integer alterId) {
+
+		Message messageResponse = service.viewMessage(messageId, alterId);
+
+		return new ResponseEntity<>(messageResponse, HttpStatusCode.valueOf(200));
+
+	}
+	
+	@GetMapping("/messages")
+	public ResponseEntity<List<Message>> getAllMessages(@RequestHeader("receiverId") Integer receiverId) {
+
+		List<Message> messageResponse = service.getAllMessages(receiverId);
+
+		return new ResponseEntity<>(messageResponse, HttpStatusCode.valueOf(200));
+
 	}
 }

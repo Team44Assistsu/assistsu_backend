@@ -9,7 +9,7 @@ public class MessageRequest {
 	private String text;
 	
 	private List<Integer> recevierIds;
-
+	
 	public Integer getFrom() {
 		return from;
 	}
