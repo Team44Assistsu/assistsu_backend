@@ -12,4 +12,6 @@ import com.winnovate.didpatients.domain.Patient;
 public interface AlterDao extends JpaRepository<Alter, Integer>{
 
 	List<Alter> findByPatient(Patient patient);
+	
+	Alter findByPatientAndAlterId(Patient patient, int alterId);
 }

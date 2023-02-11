@@ -32,10 +32,19 @@ public class AvatarController {
 	}
 
 	@GetMapping("/getAlters")
-	public ResponseEntity<List<AlterResponse>> createAlter(@RequestHeader("patientId") int patientId) {
+	public ResponseEntity<List<AlterResponse>> getAlters(@RequestHeader("patientId") int patientId) {
 
-		List<AlterResponse> alters = service.getAvatarDetails(patientId);
+		List<AlterResponse> alters = service.getAlerts(patientId);
 
 		return new ResponseEntity<>(alters, HttpStatusCode.valueOf(200));
+	}
+	
+	
+	@GetMapping("/getAlter")
+	public ResponseEntity<AlterResponse> getAlter(@RequestHeader("patientId") int patientId, @RequestHeader("alertId") int alterId) {
+
+		AlterResponse alter = service.getAlterDetails(patientId, alterId);
+
+		return new ResponseEntity<>(alter, HttpStatusCode.valueOf(200));
 	}
 }

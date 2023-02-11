@@ -51,7 +51,7 @@ public class AlterService {
 		return response;
 	}
 
-	public List<AlterResponse> getAvatarDetails(int patientId) {
+	public List<AlterResponse> getAlerts(int patientId) {
 		List<AlterResponse> altersResponse = new ArrayList<>();
 
 		Optional<Patient> patient = patientDao.findById(patientId);
@@ -65,6 +65,19 @@ public class AlterService {
 			}
 		}
 		return altersResponse;
+	}
+
+	public AlterResponse getAlterDetails(int patientId, int alterId) {
+		Optional<Patient> patient = patientDao.findById(patientId);
+		AlterResponse alterResponse = new AlterResponse();
+
+		if (patient.isPresent()) {
+			Alter alter = alterDao.findByPatientAndAlterId(patient.get(), alterId);
+			if (alter != null) {
+				alterResponse = this.prepareAlterResponse(alter);
+			}
+		}
+		return alterResponse;
 	}
 
 }
