@@ -12,6 +12,7 @@ import com.winnovate.didpatients.dao.PatientDao;
 import com.winnovate.didpatients.domain.Login;
 import com.winnovate.didpatients.domain.Patient;
 import com.winnovate.didpatients.model.PatientRequest;
+import com.winnovate.didpatients.response.PatientResponse;
 
 @Service
 public class PatientService {
@@ -22,9 +23,7 @@ public class PatientService {
 	@Autowired
 	LoginDao loginDao;
 
-	public List<Object> savePatient(PatientRequest request) {
-
-		List<Object> savedObjects = new ArrayList<>();
+	public PatientResponse savePatient(PatientRequest request) {
 
 		Login login = new Login();
 		login.setPassword(request.getPassword());
@@ -40,11 +39,22 @@ public class PatientService {
 		patient.setLogin(login);
 		patient = patientDao.save(patient);
 		
-		savedObjects.add(patient);
-		savedObjects.add(login);
-		return savedObjects;
+		return this.prepareResponse(patient);
 	}
 	
+	private PatientResponse prepareResponse(Patient patient) {
+		PatientResponse response = new PatientResponse();
+		response.setPatientId(patient.getPatientId());
+		response.setPatientName(patient.getPatientName());
+		response.setPatientAge(patient.getPatientAge());
+		response.setGender(patient.getGender());
+		response.setEmail(patient.getEmail());
+		response.setMobileNo(patient.getMobileNo());
+		response.setLoginId(patient.getLogin().getLoginId());
+		response.setUserName(patient.getLogin().getUserName());
+		return response;
+	}
+
 	public Patient getPatientDetails(int patientId) {
 		return patientDao.findByPatientId(patientId);
 	}

@@ -1,7 +1,5 @@
 package com.winnovate.didpatients.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.winnovate.didpatients.domain.Patient;
 import com.winnovate.didpatients.model.PatientRequest;
+import com.winnovate.didpatients.response.PatientResponse;
 import com.winnovate.didpatients.service.PatientService;
 
 @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -24,27 +23,14 @@ public class PatientController {
 	PatientService service;
 
 	@PostMapping("/savePatient")
-	public ResponseEntity<List<Object>> createPatientAccount(@RequestBody PatientRequest request) {
+	public ResponseEntity<PatientResponse> createPatientAccount(@RequestBody PatientRequest request) {
 
-		List<Object> savedObjects = service.savePatient(request);
-
-		return new ResponseEntity<>(savedObjects, HttpStatusCode.valueOf(200));
+		PatientResponse response = service.savePatient(request);
+		return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
 	}
 	
 	@GetMapping("/getPatientDetails")
 	public ResponseEntity<Patient> getPatientDetails(@RequestHeader("patientId") int patientId) {
 		return new ResponseEntity<>(service.getPatientDetails(patientId), HttpStatusCode.valueOf(200));
 	}
-	
-
-//	@PostMapping("/savePatient")
-//	public ResponseEntity<Patient> createPatient() {
-//		Patient patient = new Patient();
-//		patient.setGender("MALE");
-//		patient.setPatientName("DEvendra");
-//		patient.setPatientAge(26);
-//		Patient patient1 = patientDao.save(patient);
-//		return new ResponseEntity<Patient>(patient1, HttpStatusCode.valueOf(200));
-//	}
-	
 }
