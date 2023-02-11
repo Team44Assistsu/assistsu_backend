@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.winnovate.didpatients.model.LoginRequest;
 import com.winnovate.didpatients.model.LoginResponse;
 import com.winnovate.didpatients.service.LoginService;
+
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 public class LoginController {

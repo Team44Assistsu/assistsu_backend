@@ -18,16 +18,22 @@ public class Patient {
 	@jakarta.persistence.Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PATIENT_ID")
-	Integer patientId;
+	private Integer patientId;
 
 	@Column(name = "PATIENT_NAME")
-	String patientName;
+	private String patientName;
 
 	@Column(name = "PATIENT_AGE")
-	int patientAge;
+	private int patientAge;
 
 	@Column(name = "GENDER")
-	String gender;
+	private String gender;
+	
+	@Column(name = "MOBILE_NO")
+	private String mobileNo;
+	
+	@Column(name = "EMAIL")
+	private String email;
 	
 	@OneToOne
 	@JoinColumn(name = "LOGIN_ID")
@@ -82,5 +88,21 @@ public class Patient {
 
 	public void setAlters(List<Alter> alters) {
 		this.alters = alters;
+	}
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

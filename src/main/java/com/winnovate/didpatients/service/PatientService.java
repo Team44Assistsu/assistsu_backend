@@ -35,6 +35,8 @@ public class PatientService {
 		patient.setPatientName(request.getPatientName());
 		patient.setPatientAge(request.getPatientAge());
 		patient.setGender(request.getGender());
+		patient.setEmail(request.getEmail());
+		patient.setMobileNo(request.getMobileNumber());
 		patient.setLogin(login);
 		patient = patientDao.save(patient);
 		

@@ -25,6 +25,7 @@ public class LoginService {
 			if (login.getPassword().equals(loginRequest.getPassword())) {
 				response.setValid(true);
 				response.setLoginStatus("successfully logged in");
+				response.setPatientId(login.getPatient().getPatientId());
 				return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
 			} else {
 				response.setValid(false);

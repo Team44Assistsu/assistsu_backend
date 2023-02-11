@@ -2,18 +2,22 @@ package com.winnovate.didpatients.model;
 
 public class PatientRequest {
 
-	String patientName;
+	private String patientName;
 
-	int patientAge;
+	private int patientAge;
 
-	String description;
+	private String description;
 
-	String password;
+	private String password;
 
-	String userName;
+	private String userName;
 	
-	String gender;
-
+	private String gender;
+	
+	private String mobileNumber;
+	
+	private String email;
+	
 	public String getPatientName() {
 		return patientName;
 	}
@@ -60,5 +64,21 @@ public class PatientRequest {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
