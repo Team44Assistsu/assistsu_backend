@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.winnovate.didpatients.dao.LoginDao;
 import com.winnovate.didpatients.domain.Login;
 import com.winnovate.didpatients.model.LoginRequest;
+import com.winnovate.didpatients.model.LoginResponse;
 
 @Service
 public class LoginService {
@@ -15,19 +16,26 @@ public class LoginService {
 	@Autowired
 	LoginDao loginDao;
 
-	public ResponseEntity<String> validateUser(LoginRequest loginRequest) {
+	public ResponseEntity<LoginResponse> validateUser(LoginRequest loginRequest) {
 //		Login login = loginDao.findByUserNameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
 
 		Login login = loginDao.findByUserName(loginRequest.getUsername());
+		LoginResponse response = new LoginResponse();
 		if (login != null) {
 			if (login.getPassword().equals(loginRequest.getPassword())) {
-				return new ResponseEntity<>("successfully logged in", HttpStatusCode.valueOf(200));
+				response.setValid(true);
+				response.setLoginStatus("successfully logged in");
+				return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
 			} else {
-				return new ResponseEntity<>("Invalid password", HttpStatusCode.valueOf(200));
+				response.setValid(false);
+				response.setLoginStatus("Invalid password");
+				return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
 			}
 
 		} else {
-			return new ResponseEntity<>("Invalid user", HttpStatusCode.valueOf(500));
+			response.setValid(false);
+			response.setLoginStatus("Invalid user");
+			return new ResponseEntity<>(response, HttpStatusCode.valueOf(500));
 		}
 	}
 
