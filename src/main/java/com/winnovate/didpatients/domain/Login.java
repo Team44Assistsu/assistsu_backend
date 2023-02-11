@@ -57,7 +57,4 @@ public class Login {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	
-	
-
 }

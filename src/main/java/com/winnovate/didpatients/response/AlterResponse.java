@@ -1,39 +1,18 @@
-package com.winnovate.didpatients.domain;
+package com.winnovate.didpatients.response;
 
+public class AlterResponse {
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "ALTER")
-public class Alter {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ALTER_ID")
 	private Integer alterId;
 
-	@Column(name = "ALTER_NAME")
 	private String alterName;
 
-	@Column(name = "ALTER_AGE")
 	private int alterAge;
 
-	@Column(name = "ALTER_GENDER")
 	private String alterGender;
 
-	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@ManyToOne
-	@JoinColumn(name = "PATIENT_ID")
-	private Patient patient;
+	private int patientId;
 
 	public Integer getAlterId() {
 		return alterId;
@@ -75,11 +54,11 @@ public class Alter {
 		this.description = description;
 	}
 
-	public Patient getPatient() {
-		return patient;
+	public int getPatientId() {
+		return patientId;
 	}
 
-	public void setPatient(Patient patient) {
-		this.patient = patient;
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
 	}
 }

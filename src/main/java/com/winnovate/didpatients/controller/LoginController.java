@@ -17,7 +17,6 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 	
-	
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 		return loginService.validateUser(loginRequest);

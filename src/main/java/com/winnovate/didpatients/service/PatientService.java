@@ -37,7 +37,7 @@ public class PatientService {
 		patient.setGender(request.getGender());
 		patient.setLogin(login);
 		patient = patientDao.save(patient);
-
+		
 		savedObjects.add(patient);
 		savedObjects.add(login);
 		return savedObjects;
