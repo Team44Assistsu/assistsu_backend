@@ -35,6 +35,7 @@ public class AlterService {
 			alter.setPatient(patient.get());
 			alter.setDescription(request.getDescription());
 			alter.setProfImgKey(request.getProfImgKey());
+			alter.setPin(request.getPin());
 			alter = alterDao.save(alter);
 			AlterResponse alterResonse = this.prepareAlterResponse(alter);
 			return alterResonse;

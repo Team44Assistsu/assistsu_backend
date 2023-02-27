@@ -31,6 +31,9 @@ public class Alter {
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
+	@Column(name = "PIN")
+	private int pin;
+	
 	@Column(name = "PROF_IMG_KEY")
 	private int profImgKey;
 
@@ -92,5 +95,9 @@ public class Alter {
 
 	public void setProfImgKey(int profImgKey) {
 		this.profImgKey = profImgKey;
+	}
+
+	public void setPin(int pin) {
+		this.pin = pin;
 	}
 }
