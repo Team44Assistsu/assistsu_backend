@@ -112,6 +112,7 @@ public class MessageService {
 				com.winnovate.didpatients.response.Alter fromAlter = new com.winnovate.didpatients.response.Alter();
 				fromAlter.setAlterId(messageReceiver.getMessage().getFrom().getAlterId());
 				fromAlter.setAlterName(messageReceiver.getMessage().getFrom().getAlterName());
+				fromAlter.setAlterGender(messageReceiver.getMessage().getFrom().getAlterGender());
 				message.setFromAlter(fromAlter);
 				message.setMsgText(messageReceiver.getMessage().getText());
 				message.setMsgId(messageReceiver.getMessage().getMessageId());
