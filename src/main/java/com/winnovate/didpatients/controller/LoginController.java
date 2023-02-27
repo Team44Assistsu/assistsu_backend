@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.winnovate.didpatients.model.AlterLoginRequest;
 import com.winnovate.didpatients.model.LoginRequest;
 import com.winnovate.didpatients.model.LoginResponse;
 import com.winnovate.didpatients.service.LoginService;
@@ -21,5 +22,10 @@ public class LoginController {
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 		return loginService.validateUser(loginRequest);
+	}
+	
+	@PostMapping("/validateAlter")
+	public ResponseEntity<LoginResponse> login(@RequestBody AlterLoginRequest alterLoginRequest) {
+		return loginService.validateAlter(alterLoginRequest);
 	}
 }

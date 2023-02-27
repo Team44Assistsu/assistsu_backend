@@ -100,4 +100,8 @@ public class Alter {
 	public void setPin(int pin) {
 		this.pin = pin;
 	}
+
+	public int getPin() {
+		return pin;
+	}
 }
