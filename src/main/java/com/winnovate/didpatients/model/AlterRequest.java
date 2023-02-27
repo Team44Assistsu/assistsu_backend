@@ -14,6 +14,8 @@ public class AlterRequest {
 	private String description;
 
 	private int patientId;
+	
+	private int profImgKey;
 
 	public String getAlterName() {
 		return alterName;
@@ -47,6 +49,14 @@ public class AlterRequest {
 		this.description = description;
 	}
 
+	public int getProfImgKey() {
+		return profImgKey;
+	}
+
+	public void setProfImgKey(int profImgKey) {
+		this.profImgKey = profImgKey;
+	}
+	
 	public int getPatientId() {
 		return patientId;
 	}

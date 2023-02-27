@@ -34,6 +34,7 @@ public class AlterService {
 			alter.setAlterAge(request.getAlterAge());
 			alter.setPatient(patient.get());
 			alter.setDescription(request.getDescription());
+			alter.setProfImgKey(request.getProfImgKey());
 			alter = alterDao.save(alter);
 			AlterResponse alterResonse = this.prepareAlterResponse(alter);
 			return alterResonse;
@@ -47,6 +48,7 @@ public class AlterService {
 		response.setAlterName(alter.getAlterName());
 		response.setAlterAge(alter.getAlterAge());
 		response.setAlterGender(alter.getAlterGender());
+		response.setProfImgKey(alter.getProfImgKey());
 		response.setPatientId(alter.getPatient().getPatientId());
 		return response;
 	}

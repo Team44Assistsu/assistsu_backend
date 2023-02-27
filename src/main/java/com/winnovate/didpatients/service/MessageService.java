@@ -76,6 +76,7 @@ public class MessageService {
 		response.setAlterName(alter.getAlterName());
 		response.setAlterAge(alter.getAlterAge());
 		response.setAlterGender(alter.getAlterGender());
+		response.setProfImgKey(alter.getProfImgKey());
 		response.setPatientId(alter.getPatient().getPatientId());
 		return response;
 	}
@@ -89,6 +90,7 @@ public class MessageService {
 			response.setAlterName(alter.getAlterName());
 			response.setAlterAge(alter.getAlterAge());
 			response.setAlterGender(alter.getAlterGender());
+			response.setProfImgKey(alter.getProfImgKey());
 			response.setPatientId(alter.getPatient().getPatientId());
 			alterResponses.add(response);
 		}

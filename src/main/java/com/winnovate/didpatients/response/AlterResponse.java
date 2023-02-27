@@ -13,6 +13,8 @@ public class AlterResponse {
 	private String description;
 
 	private int patientId;
+	
+	private int profImgKey;
 
 	public Integer getAlterId() {
 		return alterId;
@@ -60,5 +62,13 @@ public class AlterResponse {
 
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
+	}
+
+	public int getProfImgKey() {
+		return profImgKey;
+	}
+
+	public void setProfImgKey(int profImgKey) {
+		this.profImgKey = profImgKey;
 	}
 }

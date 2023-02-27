@@ -30,6 +30,9 @@ public class Alter {
 
 	@Column(name = "DESCRIPTION")
 	private String description;
+	
+	@Column(name = "PROF_IMG_KEY")
+	private int profImgKey;
 
 	@ManyToOne
 	@JoinColumn(name = "PATIENT_ID")
@@ -81,5 +84,13 @@ public class Alter {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public int getProfImgKey() {
+		return profImgKey;
+	}
+
+	public void setProfImgKey(int profImgKey) {
+		this.profImgKey = profImgKey;
 	}
 }
