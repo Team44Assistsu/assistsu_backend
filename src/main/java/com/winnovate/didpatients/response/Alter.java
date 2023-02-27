@@ -7,6 +7,8 @@ public class Alter {
 	private String alterName;
 	
 	private String alterGender;
+	
+	private int profImgKey;
 
 	public int getAlterId() {
 		return alterId;
@@ -30,5 +32,13 @@ public class Alter {
 
 	public void setAlterGender(String alterGender) {
 		this.alterGender = alterGender;
+	}
+
+	public int getProfImgKey() {
+		return profImgKey;
+	}
+
+	public void setProfImgKey(int profImgKey) {
+		this.profImgKey = profImgKey;
 	}
 }
