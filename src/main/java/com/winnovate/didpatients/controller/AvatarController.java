@@ -49,8 +49,23 @@ public class AvatarController {
 		return new ResponseEntity<>(alter, HttpStatusCode.valueOf(200));
 	}
 	
-	@PostMapping
-	public ResponseEntity<String> updatePassword(@RequestBody ChangeAlterRequest request){
+	@PostMapping("/updateAlterPassword")
+	public ResponseEntity<String> updateAlterPassword(@RequestBody ChangeAlterRequest request){
 		return service.updateAlterPassword(request);
+	}
+	
+	@PostMapping("/updatePassword")
+	public ResponseEntity<String> updatePassword(@RequestBody ChangeAlterRequest request){
+		return service.updatePassword(request);
+	}
+	
+	@PostMapping("/updateAlterProfImg")
+	public ResponseEntity<String> updateAlterProfImg(@RequestBody ChangeAlterRequest request){
+		return service.updateAlterProfImg(request);
+	}
+	
+	@PostMapping("/updateAlterDetails")
+	public ResponseEntity<String> updateAlterDetails(@RequestBody ChangeAlterRequest request){
+		return service.updateAlterDetails(request);
 	}
 }

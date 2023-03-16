@@ -19,10 +19,6 @@ public class AlterRequest {
 	private boolean isHost;
 	
 	private boolean isCohost;
-	
-	private int oldPin;
-	
-	private int newPin;
 
 	public String getAlterName() {
 		return alterName;
@@ -94,21 +90,5 @@ public class AlterRequest {
 
 	public void setCohost(boolean isCohost) {
 		this.isCohost = isCohost;
-	}
-
-	public int getOldPin() {
-		return oldPin;
-	}
-
-	public void setOldPin(int oldPin) {
-		this.oldPin = oldPin;
-	}
-
-	public int getNewPin() {
-		return newPin;
-	}
-
-	public void setNewPin(int newPin) {
-		this.newPin = newPin;
 	}
 }

@@ -15,6 +15,10 @@ public class AlterResponse {
 	private int patientId;
 	
 	private int profImgKey;
+	
+	private boolean isHost;
+	
+	private boolean isCohost;
 
 	public Integer getAlterId() {
 		return alterId;
@@ -70,5 +74,21 @@ public class AlterResponse {
 
 	public void setProfImgKey(int profImgKey) {
 		this.profImgKey = profImgKey;
+	}
+
+	public boolean isHost() {
+		return isHost;
+	}
+
+	public void setHost(boolean isHost) {
+		this.isHost = isHost;
+	}
+
+	public boolean isCohost() {
+		return isCohost;
+	}
+
+	public void setCohost(boolean isCohost) {
+		this.isCohost = isCohost;
 	}
 }
