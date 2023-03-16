@@ -25,8 +25,8 @@ public class PatientController {
 	@PostMapping("/savePatient")
 	public ResponseEntity<PatientResponse> createPatientAccount(@RequestBody PatientRequest request) {
 
-		PatientResponse response = service.savePatient(request);
-		return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
+		ResponseEntity<PatientResponse> response = service.savePatient(request);
+		return response;
 	}
 	
 	@GetMapping("/getPatientDetails")

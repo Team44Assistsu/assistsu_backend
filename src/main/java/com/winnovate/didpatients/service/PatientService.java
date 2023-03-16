@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.winnovate.didpatients.constants.Constants;
@@ -23,25 +25,37 @@ public class PatientService {
 	@Autowired
 	LoginDao loginDao;
 
-	public PatientResponse savePatient(PatientRequest request) {
+	public ResponseEntity<PatientResponse> savePatient(PatientRequest request) {
 
-		Login login = new Login();
-		login.setPassword(request.getPassword());
-		login.setUserName(request.getUserName());
-		login = loginDao.save(login);
-		
-		Patient patient = new Patient();
-		patient.setPatientName(request.getPatientName());
-		patient.setPatientAge(request.getPatientAge());
-		patient.setGender(request.getGender());
-		patient.setEmail(request.getEmail());
-		patient.setMobileNo(request.getMobileNumber());
-		patient.setLogin(login);
-		patient = patientDao.save(patient);
-		
-		return this.prepareResponse(patient);
+		boolean isUserExisting = this.validateUser(request);
+
+		if (!isUserExisting) {
+			Login login = new Login();
+			login.setPassword(request.getPassword());
+			login.setUserName(request.getUserName());
+			login = loginDao.save(login);
+			Patient patient = new Patient();
+			patient.setPatientName(request.getPatientName());
+			patient.setPatientAge(request.getPatientAge());
+			patient.setGender(request.getGender());
+			patient.setEmail(request.getEmail());
+			patient.setMobileNo(request.getMobileNumber());
+			patient.setLogin(login);
+			patient = patientDao.save(patient);
+			PatientResponse response = this.prepareResponse(patient);
+			return new ResponseEntity<>(response, HttpStatusCode.valueOf(201));
+		}
+		return new ResponseEntity<>(null, HttpStatusCode.valueOf(500));
 	}
-	
+
+	private boolean validateUser(PatientRequest request) {
+		Login login = loginDao.findByUserName(request.getUserName());
+		if (login != null) {
+			return true;
+		}
+		return false;
+	}
+
 	private PatientResponse prepareResponse(Patient patient) {
 		PatientResponse response = new PatientResponse();
 		response.setPatientId(patient.getPatientId());

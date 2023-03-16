@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.winnovate.didpatients.dao.AlterDao;
@@ -12,6 +14,7 @@ import com.winnovate.didpatients.dao.PatientDao;
 import com.winnovate.didpatients.domain.Alter;
 import com.winnovate.didpatients.domain.Patient;
 import com.winnovate.didpatients.model.AlterRequest;
+import com.winnovate.didpatients.model.ChangeAlterRequest;
 import com.winnovate.didpatients.response.AlterResponse;
 
 @Service
@@ -36,6 +39,8 @@ public class AlterService {
 			alter.setDescription(request.getDescription());
 			alter.setProfImgKey(request.getProfImgKey());
 			alter.setPin(request.getPin());
+			alter.setHost(request.isHost());
+			alter.setCohost(request.isCohost());
 			alter = alterDao.save(alter);
 			AlterResponse alterResonse = this.prepareAlterResponse(alter);
 			return alterResonse;
@@ -81,6 +86,21 @@ public class AlterService {
 			}
 		}
 		return alterResponse;
+	}
+	
+	public ResponseEntity<String> updateAlterPassword(ChangeAlterRequest request) {
+		Optional<Alter> alter = alterDao.findById(request.getAlterId());
+		if(alter.isPresent()) {
+			if(alter.get().getPin() == request.getOldPin()) {
+				alter.get().setPin(request.getNewPin());
+				alterDao.save(alter.get());
+				return new ResponseEntity<String>("Password updated successfully", HttpStatusCode.valueOf(200));
+			} else {
+				return new ResponseEntity<String>("Old password is not matching", HttpStatusCode.valueOf(401)); 
+			}
+		} else {
+			return new ResponseEntity<String>("Alter does not exists", HttpStatusCode.valueOf(404)); 
+		}
 	}
 
 }

@@ -25,7 +25,6 @@ public class LoginService {
 	AlterDao alterDao;
 
 	public ResponseEntity<LoginResponse> validateUser(LoginRequest loginRequest) {
-//		Login login = loginDao.findByUserNameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
 
 		Login login = loginDao.findByUserName(loginRequest.getUsername());
 		LoginResponse response = new LoginResponse();
@@ -38,13 +37,13 @@ public class LoginService {
 			} else {
 				response.setValid(false);
 				response.setLoginStatus("Invalid password");
-				return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
+				return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
 			}
 
 		} else {
 			response.setValid(false);
 			response.setLoginStatus("Invalid user");
-			return new ResponseEntity<>(response, HttpStatusCode.valueOf(500));
+			return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
 		}
 	}
 
@@ -60,13 +59,13 @@ public class LoginService {
 			} else {
 				response.setValid(false);
 				response.setLoginStatus("Invalid alter pin");
-				return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
+				return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
 			}
 
 		} else {
 			response.setValid(false);
 			response.setLoginStatus("Invalid alter");
-			return new ResponseEntity<>(response, HttpStatusCode.valueOf(500));
+			return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
 		}
 	}
 

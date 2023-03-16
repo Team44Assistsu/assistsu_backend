@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.winnovate.didpatients.model.AlterRequest;
+import com.winnovate.didpatients.model.ChangeAlterRequest;
 import com.winnovate.didpatients.response.AlterResponse;
 import com.winnovate.didpatients.service.AlterService;
 
@@ -46,5 +47,10 @@ public class AvatarController {
 		AlterResponse alter = service.getAlterDetails(patientId, alterId);
 
 		return new ResponseEntity<>(alter, HttpStatusCode.valueOf(200));
+	}
+	
+	@PostMapping
+	public ResponseEntity<String> updatePassword(@RequestBody ChangeAlterRequest request){
+		return service.updateAlterPassword(request);
 	}
 }
