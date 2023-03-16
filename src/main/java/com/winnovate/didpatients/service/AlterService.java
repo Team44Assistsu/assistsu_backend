@@ -1,7 +1,9 @@
 package com.winnovate.didpatients.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,45 +94,35 @@ public class AlterService {
 	}
 	
 	public ResponseEntity<String> updateAlterPassword(ChangeAlterRequest request) {
-		if (request.isHost() || request.isCohost() || request.isSelf()) {
-			Optional<Alter> alter = alterDao.findById(request.getAlterId());
-			if (alter.isPresent()) {
-				if (alter.get().getPin() == request.getOldPin()) {
-					alter.get().setPin(request.getNewPin());
-					alterDao.save(alter.get());
-					return new ResponseEntity<String>("password updated successfully.", HttpStatusCode.valueOf(200));
-				} else {
-					return new ResponseEntity<String>("old password is not matching.", HttpStatusCode.valueOf(401));
-				}
+		Optional<Alter> alter = alterDao.findById(request.getAlterId());
+		if (alter.isPresent()) {
+			if (alter.get().getPin() == request.getOldPin()) {
+				alter.get().setPin(request.getNewPin());
+				alterDao.save(alter.get());
+				return new ResponseEntity<String>("password updated successfully.", HttpStatusCode.valueOf(200));
 			} else {
-				return new ResponseEntity<String>("alter does not exists.", HttpStatusCode.valueOf(404));
+				return new ResponseEntity<String>("old password is not matching.", HttpStatusCode.valueOf(401));
 			}
 		} else {
-			return new ResponseEntity<String>("alter does not have access to update the password.",
-					HttpStatusCode.valueOf(401));
+			return new ResponseEntity<String>("alter does not exists.", HttpStatusCode.valueOf(404));
 		}
 	}
 
 	public ResponseEntity<String> updateAlterProfImg(ChangeAlterRequest request) {
-		if(request.isHost() || request.isCohost() || request.isSelf()) {
-			Optional<Alter> alter = alterDao.findById(request.getAlterId());
-			if (alter.isPresent()) {
-				alter.get().setProfImgKey(request.getProfImgKey());
-				alterDao.save(alter.get());
-				return new ResponseEntity<String>("profile picture updated successfully.", HttpStatusCode.valueOf(200));
-			} else {
-				return new ResponseEntity<String>("alter does not exists.", HttpStatusCode.valueOf(404));
-			}
+		Optional<Alter> alter = alterDao.findById(request.getAlterId());
+		if (alter.isPresent()) {
+			alter.get().setProfImgKey(request.getProfImgKey());
+			alterDao.save(alter.get());
+			return new ResponseEntity<String>("profile picture updated successfully.", HttpStatusCode.valueOf(200));
 		} else {
-			return new ResponseEntity<String>("alter does not have access to update the profile picture.",
-					HttpStatusCode.valueOf(401));
+			return new ResponseEntity<String>("alter does not exists.", HttpStatusCode.valueOf(404));
 		}
 	}
 
 	public ResponseEntity<String> updatePassword(ChangeAlterRequest request) {
-		if (request.isHost()) {
-			Optional<Alter> alter = alterDao.findById(request.getAlterId());
-			if (alter.isPresent()) {
+		Optional<Alter> alter = alterDao.findById(request.getAlterId());
+		if (alter.isPresent()) {
+			if (alter.get().isHost()) {
 				if (alter.get().getPatient().getLogin().getPassword().equals(request.getOldPassword())) {
 					alter.get().getPatient().getLogin().setPassword(request.getNewPassword());
 					alterDao.save(alter.get());
@@ -139,11 +131,12 @@ public class AlterService {
 					return new ResponseEntity<String>("old password is not matching.", HttpStatusCode.valueOf(401));
 				}
 			} else {
-				return new ResponseEntity<String>("alter does not exists.", HttpStatusCode.valueOf(404));
+				return new ResponseEntity<String>("alter does not have access to update the password.",
+						HttpStatusCode.valueOf(401));
 			}
 		} else {
-			return new ResponseEntity<String>("alter does not have access to update the password.",
-					HttpStatusCode.valueOf(401));
+			return new ResponseEntity<String>("alter does not exists.", HttpStatusCode.valueOf(404));
+
 		}
 	}
 
@@ -165,6 +158,26 @@ public class AlterService {
 		} else {
 			return new ResponseEntity<String>("alter does not have access to update the profile picture.",
 					HttpStatusCode.valueOf(401));
+		}
+	}
+
+	public ResponseEntity<Map<String, Boolean>> getAltersCohostAccessList(int alterId) {
+		Map<String, Boolean> altersCohostMap = new HashMap<>();
+		Optional<Alter> altr = alterDao.findById(alterId);
+		if (altr.isPresent()) {
+			if (altr.get().isHost()) {
+				List<Alter> alters = altr.get().getPatient().getAlters();
+				alters.remove(altr.get());
+				for (Alter alter : alters) {
+					altersCohostMap.put(alter.getAlterName(), alter.isCohost());
+				}
+				return new ResponseEntity<>(altersCohostMap, HttpStatusCode.valueOf(200));
+			} else {
+				return new ResponseEntity<>(altersCohostMap, HttpStatusCode.valueOf(401));
+			}
+		} else {
+			return new ResponseEntity<>(altersCohostMap, HttpStatusCode.valueOf(404));
+
 		}
 	}
 

@@ -1,6 +1,7 @@
 package com.winnovate.didpatients.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -67,5 +68,10 @@ public class AvatarController {
 	@PostMapping("/updateAlterDetails")
 	public ResponseEntity<String> updateAlterDetails(@RequestBody ChangeAlterRequest request){
 		return service.updateAlterDetails(request);
+	}
+	
+	@GetMapping("/getAlterAccessDetails")
+	public ResponseEntity<Map<String, Boolean>> getAltersCohostAccess(@RequestHeader("alterId") int alterId){
+		return service.getAltersCohostAccessList(alterId);
 	}
 }
