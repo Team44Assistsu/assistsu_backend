@@ -76,6 +76,7 @@ public class MessageService {
 		response.setAlterName(alter.getAlterName());
 		response.setAlterAge(alter.getAlterAge());
 		response.setAlterGender(alter.getAlterGender());
+		response.setProfImgKey(alter.getProfImgKey());
 		response.setPatientId(alter.getPatient().getPatientId());
 		return response;
 	}
@@ -89,6 +90,7 @@ public class MessageService {
 			response.setAlterName(alter.getAlterName());
 			response.setAlterAge(alter.getAlterAge());
 			response.setAlterGender(alter.getAlterGender());
+			response.setProfImgKey(alter.getProfImgKey());
 			response.setPatientId(alter.getPatient().getPatientId());
 			alterResponses.add(response);
 		}
@@ -107,11 +109,15 @@ public class MessageService {
 				com.winnovate.didpatients.response.Alter toAlter = new com.winnovate.didpatients.response.Alter();
 				toAlter.setAlterId(messageReceiver.getTo().getAlterId());
 				toAlter.setAlterName(messageReceiver.getTo().getAlterName());
+				toAlter.setAlterGender(messageReceiver.getTo().getAlterGender());
+				toAlter.setProfImgKey(messageReceiver.getTo().getProfImgKey());
 				message.setToAlter(toAlter);
 
 				com.winnovate.didpatients.response.Alter fromAlter = new com.winnovate.didpatients.response.Alter();
 				fromAlter.setAlterId(messageReceiver.getMessage().getFrom().getAlterId());
 				fromAlter.setAlterName(messageReceiver.getMessage().getFrom().getAlterName());
+				fromAlter.setAlterGender(messageReceiver.getMessage().getFrom().getAlterGender());
+				fromAlter.setProfImgKey(messageReceiver.getMessage().getFrom().getProfImgKey());
 				message.setFromAlter(fromAlter);
 				message.setMsgText(messageReceiver.getMessage().getText());
 				message.setMsgId(messageReceiver.getMessage().getMessageId());
@@ -135,6 +141,8 @@ public class MessageService {
 			com.winnovate.didpatients.response.Alter fromAlter = new com.winnovate.didpatients.response.Alter();
 			fromAlter.setAlterId(sentMessage.get().getFrom().getAlterId());
 			fromAlter.setAlterName(sentMessage.get().getFrom().getAlterName());
+			fromAlter.setAlterGender(sentMessage.get().getFrom().getAlterGender());
+			fromAlter.setProfImgKey(sentMessage.get().getFrom().getProfImgKey());
 			message.setFromAlter(fromAlter);
 			message.setMsgText(sentMessage.get().getText());
 			message.setMsgSentDate(sentMessage.get().getDate());

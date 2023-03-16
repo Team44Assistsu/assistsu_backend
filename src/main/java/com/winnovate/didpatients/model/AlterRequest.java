@@ -1,8 +1,5 @@
 package com.winnovate.didpatients.model;
 
-import lombok.Data;
-
-@Data
 public class AlterRequest {
 
 	private String alterName;
@@ -14,6 +11,10 @@ public class AlterRequest {
 	private String description;
 
 	private int patientId;
+	
+	private int profImgKey;
+	
+	private int pin;
 
 	public String getAlterName() {
 		return alterName;
@@ -47,6 +48,22 @@ public class AlterRequest {
 		this.description = description;
 	}
 
+	public int getProfImgKey() {
+		return profImgKey;
+	}
+
+	public void setProfImgKey(int profImgKey) {
+		this.profImgKey = profImgKey;
+	}
+	
+	public int getPin() {
+		return pin;
+	}
+
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+
 	public int getPatientId() {
 		return patientId;
 	}
@@ -54,4 +71,5 @@ public class AlterRequest {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
+	
 }
