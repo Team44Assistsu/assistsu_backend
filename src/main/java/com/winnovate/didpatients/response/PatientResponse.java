@@ -33,6 +33,9 @@ public class PatientResponse {
 	
 	@JsonInclude(Include.NON_NULL)
 	private List<AlterResponse> alters;
+	
+	@JsonInclude(Include.NON_NULL)
+	private int profImgKey;
 
 	public Integer getPatientId() {
 		return patientId;
@@ -104,5 +107,13 @@ public class PatientResponse {
 
 	public void setAlters(List<AlterResponse> alters) {
 		this.alters = alters;
+	}
+
+	public int getProfImgKey() {
+		return profImgKey;
+	}
+
+	public void setProfImgKey(int profImgKey) {
+		this.profImgKey = profImgKey;
 	}
 }

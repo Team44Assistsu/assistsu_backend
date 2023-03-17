@@ -6,4 +6,6 @@ import com.winnovate.didpatients.domain.Therapist;
 
 public interface TherapistDao extends JpaRepository<Therapist, Integer> {
 
+	Therapist findByEmail(String email);
+	
 }

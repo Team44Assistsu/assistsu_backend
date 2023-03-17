@@ -31,7 +31,11 @@ public class LoginService {
 		if (login != null) {
 			if (login.getPassword().equals(loginRequest.getPassword())) {
 				response.setValid(true);
-				response.setLoginStatus("successfully logged in");
+				if (login.isNewLogin()) {
+					response.setLoginStatus("successfully logged in. Updated the password");
+				} else {
+					response.setLoginStatus("successfully logged in");
+				}
 				if (login.getPatient() != null) {
 					response.setPatientId(login.getPatient().getPatientId());
 				} else {

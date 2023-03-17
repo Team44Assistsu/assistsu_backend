@@ -66,7 +66,18 @@ public class PatientService {
 		return response;
 	}
 
-	public Patient getPatientDetails(int patientId) {
-		return patientDao.findByPatientId(patientId);
+	public ResponseEntity<Object> getPatientDetails(int patientId) {
+		Patient patient = patientDao.findByPatientId(patientId);
+		if (patient != null) {
+			PatientResponse patientResponse = this.prepareResponse(patient);
+			int profImgKey = patient.getAlters().stream().filter(alter -> alter.isHost()).findFirst().get()
+					.getProfImgKey();
+			if(profImgKey != 0) {
+				patientResponse.setProfImgKey(profImgKey);
+			}
+			return new ResponseEntity<>(patientResponse, HttpStatusCode.valueOf(200));
+		} else {
+			return new ResponseEntity<>("Patient Id not found", HttpStatusCode.valueOf(404));
+		}
 	}
 }

@@ -30,7 +30,7 @@ public class PatientController {
 	}
 	
 	@GetMapping("/getPatientDetails")
-	public ResponseEntity<Patient> getPatientDetails(@RequestHeader("patientId") int patientId) {
-		return new ResponseEntity<>(service.getPatientDetails(patientId), HttpStatusCode.valueOf(200));
+	public ResponseEntity<Object> getPatientDetails(@RequestHeader("patientId") int patientId) {
+		return service.getPatientDetails(patientId);
 	}
 }
