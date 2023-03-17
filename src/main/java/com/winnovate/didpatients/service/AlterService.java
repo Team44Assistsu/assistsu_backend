@@ -181,4 +181,23 @@ public class AlterService {
 		}
 	}
 
+	public ResponseEntity<String> updateAlterAccess(List<ChangeAlterRequest> request) {
+		List<Integer> alterIds = new ArrayList<>();
+		for (ChangeAlterRequest changeAlterRequest : request) {
+			Optional<Alter> alter = alterDao.findById(changeAlterRequest.getAlterId());
+			if (alter.isPresent()) {
+				alter.get().setCohost(changeAlterRequest.isCohost());
+				alterDao.save(alter.get());
+			} else {
+				alterIds.add(changeAlterRequest.getAlterId());
+			}
+		}
+		if (alterIds.size() == 0) {
+			return new ResponseEntity<String>("Updated the cohost access sucessfully", HttpStatusCode.valueOf(200));
+		} else {
+			return new ResponseEntity<String>("The alters Ids { " + alterIds + " } are not found",
+					HttpStatusCode.valueOf(404));
+		}
+	} 
+
 }

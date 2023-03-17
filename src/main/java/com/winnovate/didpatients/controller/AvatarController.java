@@ -74,4 +74,9 @@ public class AvatarController {
 	public ResponseEntity<Map<String, Boolean>> getAltersCohostAccess(@RequestHeader("alterId") int alterId){
 		return service.getAltersCohostAccessList(alterId);
 	}
+	
+	@PostMapping("/updateAlterAccess")
+	public ResponseEntity<String> updateAlterAccess(@RequestBody List<ChangeAlterRequest> request){
+		return service.updateAlterAccess(request);
+	}
 }
