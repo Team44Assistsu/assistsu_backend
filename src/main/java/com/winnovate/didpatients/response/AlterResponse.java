@@ -1,23 +1,35 @@
 package com.winnovate.didpatients.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class AlterResponse {
 
+	@JsonInclude(Include.NON_NULL)
 	private Integer alterId;
 
+	@JsonInclude(Include.NON_NULL)
 	private String alterName;
 
+	@JsonInclude(Include.NON_NULL)
 	private int alterAge;
 
+	@JsonInclude(Include.NON_NULL)
 	private String alterGender;
 
+	@JsonInclude(Include.NON_NULL)
 	private String description;
 
+	@JsonInclude(Include.NON_NULL)
 	private int patientId;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	private int profImgKey;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	private boolean isHost;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	private boolean isCohost;
 
 	public Integer getAlterId() {

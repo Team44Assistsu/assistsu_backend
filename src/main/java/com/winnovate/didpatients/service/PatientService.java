@@ -1,14 +1,10 @@
 package com.winnovate.didpatients.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.winnovate.didpatients.constants.Constants;
 import com.winnovate.didpatients.dao.LoginDao;
 import com.winnovate.didpatients.dao.PatientDao;
 import com.winnovate.didpatients.domain.Login;
@@ -25,7 +21,7 @@ public class PatientService {
 	@Autowired
 	LoginDao loginDao;
 
-	public ResponseEntity<PatientResponse> savePatient(PatientRequest request) {
+	public ResponseEntity<Object> savePatient(PatientRequest request) {
 
 		boolean isUserExisting = this.validateUser(request);
 
@@ -44,8 +40,9 @@ public class PatientService {
 			patient = patientDao.save(patient);
 			PatientResponse response = this.prepareResponse(patient);
 			return new ResponseEntity<>(response, HttpStatusCode.valueOf(201));
+		} else {
+			return new ResponseEntity<>("User Id already exists" , HttpStatusCode.valueOf(500));
 		}
-		return new ResponseEntity<>(null, HttpStatusCode.valueOf(500));
 	}
 
 	private boolean validateUser(PatientRequest request) {

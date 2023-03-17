@@ -13,7 +13,7 @@ import com.winnovate.didpatients.domain.Alter;
 import com.winnovate.didpatients.domain.Login;
 import com.winnovate.didpatients.model.AlterLoginRequest;
 import com.winnovate.didpatients.model.LoginRequest;
-import com.winnovate.didpatients.model.LoginResponse;
+import com.winnovate.didpatients.response.LoginResponse;
 
 @Service
 public class LoginService {
@@ -32,7 +32,11 @@ public class LoginService {
 			if (login.getPassword().equals(loginRequest.getPassword())) {
 				response.setValid(true);
 				response.setLoginStatus("successfully logged in");
-				response.setPatientId(login.getPatient().getPatientId());
+				if (login.getPatient() != null) {
+					response.setPatientId(login.getPatient().getPatientId());
+				} else {
+					response.setTherapistId(login.getTherpaist().getTherapistId());
+				}
 				return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
 			} else {
 				response.setValid(false);

@@ -25,6 +25,9 @@ public class Login {
 
 	@OneToOne(mappedBy="login")
     Patient patient;
+	
+	@OneToOne(mappedBy="loginDetails")
+    Therapist therpaist;
 
 	public String getUserName() {
 		return userName;
@@ -56,5 +59,13 @@ public class Login {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public Therapist getTherpaist() {
+		return therpaist;
+	}
+
+	public void setTherpaist(Therapist therpaist) {
+		this.therpaist = therpaist;
 	}
 }
