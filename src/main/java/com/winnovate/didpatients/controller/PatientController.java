@@ -1,7 +1,6 @@
 package com.winnovate.didpatients.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.winnovate.didpatients.domain.Patient;
 import com.winnovate.didpatients.model.PatientRequest;
-import com.winnovate.didpatients.response.PatientResponse;
 import com.winnovate.didpatients.service.PatientService;
 
 @CrossOrigin(origins = "*",allowedHeaders = "*")

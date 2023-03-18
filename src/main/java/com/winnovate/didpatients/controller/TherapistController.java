@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.winnovate.didpatients.model.TherapistRequest;
-import com.winnovate.didpatients.response.TherapistResponse;
 import com.winnovate.didpatients.service.TherapistService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")

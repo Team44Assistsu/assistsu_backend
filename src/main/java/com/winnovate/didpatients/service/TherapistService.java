@@ -16,7 +16,6 @@ import com.winnovate.didpatients.domain.Login;
 import com.winnovate.didpatients.domain.Patient;
 import com.winnovate.didpatients.domain.Therapist;
 import com.winnovate.didpatients.model.TherapistRequest;
-import com.winnovate.didpatients.response.AlterResponse;
 import com.winnovate.didpatients.response.PatientResponse;
 import com.winnovate.didpatients.response.TherapistResponse;
 
@@ -92,7 +91,7 @@ public class TherapistService {
 				}
 			}
 			response.setPatients(patientResponses);
-			return new ResponseEntity<>(response, HttpStatusCode.valueOf(500));
+			return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
 		} else {
 			return new ResponseEntity<>("Therapist Id does not exists", HttpStatusCode.valueOf(500));
 		}
