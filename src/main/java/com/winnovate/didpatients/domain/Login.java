@@ -25,6 +25,12 @@ public class Login {
 
 	@OneToOne(mappedBy="login")
     Patient patient;
+	
+	@OneToOne(mappedBy="loginDetails")
+    Therapist therpaist;
+	
+	@Column(name = "NEW_LOGIN")
+	boolean newLogin;
 
 	public String getUserName() {
 		return userName;
@@ -56,5 +62,21 @@ public class Login {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public Therapist getTherpaist() {
+		return therpaist;
+	}
+
+	public void setTherpaist(Therapist therpaist) {
+		this.therpaist = therpaist;
+	}
+
+	public boolean isNewLogin() {
+		return newLogin;
+	}
+
+	public void setNewLogin(boolean newLogin) {
+		this.newLogin = newLogin;
 	}
 }

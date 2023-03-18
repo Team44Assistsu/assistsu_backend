@@ -36,6 +36,12 @@ public class Alter {
 	
 	@Column(name = "PROF_IMG_KEY")
 	private int profImgKey;
+	
+	@Column(name = "IS_HOST")
+	private boolean isHost;
+	
+	@Column(name = "IS_CO_HOST")
+	private boolean isCohost;
 
 	@ManyToOne
 	@JoinColumn(name = "PATIENT_ID")
@@ -103,5 +109,21 @@ public class Alter {
 
 	public int getPin() {
 		return pin;
+	}
+
+	public boolean isHost() {
+		return isHost;
+	}
+
+	public void setHost(boolean isHost) {
+		this.isHost = isHost;
+	}
+
+	public boolean isCohost() {
+		return isCohost;
+	}
+
+	public void setCohost(boolean isCohost) {
+		this.isCohost = isCohost;
 	}
 }

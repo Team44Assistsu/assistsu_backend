@@ -15,6 +15,10 @@ public class AlterRequest {
 	private int profImgKey;
 	
 	private int pin;
+	
+	private boolean isHost;
+	
+	private boolean isCohost;
 
 	public String getAlterName() {
 		return alterName;
@@ -71,5 +75,20 @@ public class AlterRequest {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-	
+
+	public boolean isHost() {
+		return isHost;
+	}
+
+	public void setHost(boolean isHost) {
+		this.isHost = isHost;
+	}
+
+	public boolean isCohost() {
+		return isCohost;
+	}
+
+	public void setCohost(boolean isCohost) {
+		this.isCohost = isCohost;
+	}
 }

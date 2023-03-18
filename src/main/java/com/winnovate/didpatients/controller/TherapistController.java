@@ -9,25 +9,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.winnovate.didpatients.model.PatientRequest;
-import com.winnovate.didpatients.service.PatientService;
+import com.winnovate.didpatients.model.TherapistRequest;
+import com.winnovate.didpatients.service.TherapistService;
 
-@CrossOrigin(origins = "*",allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-public class PatientController {
+public class TherapistController {
 
 	@Autowired
-	PatientService service;
+	TherapistService service;
 
-	@PostMapping("/savePatient")
-	public ResponseEntity<Object> createPatientAccount(@RequestBody PatientRequest request) {
-
-		ResponseEntity<Object> response = service.savePatient(request);
+	@PostMapping("/saveTherapist")
+	public ResponseEntity<Object> createPatientAccount(@RequestBody TherapistRequest request) {
+		ResponseEntity<Object> response = service.saveTherapist(request);
 		return response;
 	}
 	
-	@GetMapping("/getPatientDetails")
-	public ResponseEntity<Object> getPatientDetails(@RequestHeader("patientId") int patientId) {
+	@GetMapping("/getPatients")
+	public ResponseEntity<Object> getPatientDetails(@RequestHeader("therapistId") int patientId){
 		return service.getPatientDetails(patientId);
 	}
 }

@@ -1,22 +1,41 @@
 package com.winnovate.didpatients.response;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class PatientResponse {
 
+	@JsonInclude(Include.NON_NULL)
 	private Integer patientId;
 
+	@JsonInclude(Include.NON_NULL)
 	private String patientName;
 
+	@JsonInclude(Include.NON_NULL)
 	private int patientAge;
 
+	@JsonInclude(Include.NON_NULL)
 	private String gender;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String mobileNo;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String email;
 	
+	@JsonInclude(Include.NON_NULL)
 	private Integer loginId;
 
+	@JsonInclude(Include.NON_NULL)
 	private String userName;
+	
+	@JsonInclude(Include.NON_NULL)
+	private List<AlterResponse> alters;
+	
+	@JsonInclude(Include.NON_NULL)
+	private int profImgKey;
 
 	public Integer getPatientId() {
 		return patientId;
@@ -80,5 +99,21 @@ public class PatientResponse {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public List<AlterResponse> getAlters() {
+		return alters;
+	}
+
+	public void setAlters(List<AlterResponse> alters) {
+		this.alters = alters;
+	}
+
+	public int getProfImgKey() {
+		return profImgKey;
+	}
+
+	public void setProfImgKey(int profImgKey) {
+		this.profImgKey = profImgKey;
 	}
 }

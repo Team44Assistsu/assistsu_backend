@@ -3,18 +3,27 @@ package com.winnovate.didpatients.response;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class MessageResponse {
 
+	@JsonInclude(Include.NON_NULL)
 	int msgId;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	String msgText;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	AlterResponse msgFrom;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	List<AlterResponse> msgTo;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	Date msgSentTime;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	boolean isRead = false;
 
 	public int getMsgId() {

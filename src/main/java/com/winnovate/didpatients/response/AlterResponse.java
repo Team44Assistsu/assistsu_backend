@@ -1,20 +1,36 @@
 package com.winnovate.didpatients.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class AlterResponse {
 
+	@JsonInclude(Include.NON_NULL)
 	private Integer alterId;
 
+	@JsonInclude(Include.NON_NULL)
 	private String alterName;
 
+	@JsonInclude(Include.NON_NULL)
 	private int alterAge;
 
+	@JsonInclude(Include.NON_NULL)
 	private String alterGender;
 
+	@JsonInclude(Include.NON_NULL)
 	private String description;
 
+	@JsonInclude(Include.NON_NULL)
 	private int patientId;
-	
+
+	@JsonInclude(Include.NON_NULL)
 	private int profImgKey;
+
+	@JsonInclude(Include.NON_NULL)
+	private boolean isHost;
+
+	@JsonInclude(Include.NON_NULL)
+	private boolean isCohost;
 
 	public Integer getAlterId() {
 		return alterId;
@@ -70,5 +86,21 @@ public class AlterResponse {
 
 	public void setProfImgKey(int profImgKey) {
 		this.profImgKey = profImgKey;
+	}
+
+	public boolean isHost() {
+		return isHost;
+	}
+
+	public void setHost(boolean isHost) {
+		this.isHost = isHost;
+	}
+
+	public boolean isCohost() {
+		return isCohost;
+	}
+
+	public void setCohost(boolean isCohost) {
+		this.isCohost = isCohost;
 	}
 }
