@@ -11,12 +11,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ALTER")
+@Table(name = "alter_details")
 public class Alter {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ALTER_ID")
+	@Column(name = "ALTERID")
 	private Integer alterId;
 
 	@Column(name = "ALTER_NAME")
@@ -28,7 +28,7 @@ public class Alter {
 	@Column(name = "ALTER_GENDER")
 	private String alterGender;
 
-	@Column(name = "DESCRIPTION")
+	@Column(name = "description")
 	private String description;
 	
 	@Column(name = "PIN")

@@ -14,7 +14,7 @@ public class Login {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "LOGIN_ID")
+	@Column(name = "LOGINID")
 	Integer loginId;
 
 	@Column(name = "USERNAME")

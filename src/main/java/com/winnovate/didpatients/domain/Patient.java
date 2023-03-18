@@ -13,35 +13,35 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "PATIENT")
+@Table(name = "PatientDetails")
 public class Patient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PATIENT_ID")
+	@Column(name = "PATIENTID")
 	private Integer patientId;
 
-	@Column(name = "PATIENT_NAME")
+	@Column(name = "PATIENTNAME")
 	private String patientName;
 
-	@Column(name = "PATIENT_AGE")
+	@Column(name = "AGE")
 	private int patientAge;
 
 	@Column(name = "GENDER")
 	private String gender;
-	
-	@Column(name = "MOBILE_NO")
+
+	@Column(name = "MOBILENUMBER")
 	private String mobileNo;
-	
-	@Column(name = "EMAIL")
+
+	@Column(name = "EMAILID")
 	private String email;
-	
+
 	@OneToOne
 	@JoinColumn(name = "LOGIN_ID")
 	Login login;
-	
-	@OneToMany(mappedBy="patient")
-    List<Alter> alters;
+
+	@OneToMany(mappedBy = "patient")
+	List<Alter> alters;
 
 	public Integer getPatientId() {
 		return patientId;
