@@ -17,6 +17,7 @@ import com.winnovate.didpatients.domain.Alter;
 import com.winnovate.didpatients.domain.Patient;
 import com.winnovate.didpatients.model.AlterRequest;
 import com.winnovate.didpatients.model.ChangeAlterRequest;
+import com.winnovate.didpatients.response.AlterAccessResponse;
 import com.winnovate.didpatients.response.AlterResponse;
 
 @Service
@@ -156,27 +157,32 @@ public class AlterService {
 				return new ResponseEntity<String>("alter does not exists.", HttpStatusCode.valueOf(404));
 			}
 		} else {
-			return new ResponseEntity<String>("alter does not have access to update the profile picture.",
+			return new ResponseEntity<String>("alter does not have access to update the profile details.",
 					HttpStatusCode.valueOf(401));
 		}
 	}
 
-	public ResponseEntity<Map<String, Boolean>> getAltersCohostAccessList(int alterId) {
-		Map<String, Boolean> altersCohostMap = new HashMap<>();
+	public ResponseEntity<Object> getAltersCohostAccessList(int alterId) {
+		List<AlterAccessResponse> alterResponses = new ArrayList<>();
 		Optional<Alter> altr = alterDao.findById(alterId);
 		if (altr.isPresent()) {
 			if (altr.get().isHost()) {
 				List<Alter> alters = altr.get().getPatient().getAlters();
 				alters.remove(altr.get());
 				for (Alter alter : alters) {
-					altersCohostMap.put(alter.getAlterName(), alter.isCohost());
+					AlterAccessResponse alterResponse = new AlterAccessResponse();
+					alterResponse.setAlterId(alter.getAlterId());
+					alterResponse.setAlterName(alter.getAlterName());
+					alterResponse.setCohost(alter.isCohost());
+					alterResponses.add(alterResponse);
 				}
-				return new ResponseEntity<>(altersCohostMap, HttpStatusCode.valueOf(200));
+				return new ResponseEntity<>(alterResponses, HttpStatusCode.valueOf(200));
 			} else {
-				return new ResponseEntity<>(altersCohostMap, HttpStatusCode.valueOf(401));
+				return new ResponseEntity<>("Alter does not have access to view the cohost access",
+						HttpStatusCode.valueOf(401));
 			}
 		} else {
-			return new ResponseEntity<>(altersCohostMap, HttpStatusCode.valueOf(404));
+			return new ResponseEntity<>("Alter Id does not exists.", HttpStatusCode.valueOf(404));
 
 		}
 	}

@@ -43,7 +43,7 @@ public class AvatarController {
 	
 	
 	@GetMapping("/getAlter")
-	public ResponseEntity<AlterResponse> getAlter(@RequestHeader("patientId") int patientId, @RequestHeader("alertId") int alterId) {
+	public ResponseEntity<AlterResponse> getAlter(@RequestHeader("patientId") int patientId, @RequestHeader("alterId") int alterId) {
 
 		AlterResponse alter = service.getAlterDetails(patientId, alterId);
 
@@ -71,7 +71,7 @@ public class AvatarController {
 	}
 	
 	@GetMapping("/getAlterAccessDetails")
-	public ResponseEntity<Map<String, Boolean>> getAltersCohostAccess(@RequestHeader("alterId") int alterId){
+	public ResponseEntity<Object> getAltersCohostAccess(@RequestHeader("alterId") int alterId){
 		return service.getAltersCohostAccessList(alterId);
 	}
 	
