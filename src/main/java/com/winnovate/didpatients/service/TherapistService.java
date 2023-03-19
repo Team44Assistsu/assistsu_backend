@@ -38,6 +38,7 @@ public class TherapistService {
 			Login login = new Login();
 			login.setPassword(request.getPassword());
 			login.setUserName(request.getUserName());
+			login.setNewLogin(false);
 			login = loginDao.save(login);
 
 			Therapist therapist = new Therapist();
