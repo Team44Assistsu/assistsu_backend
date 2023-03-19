@@ -43,7 +43,7 @@ public class AvatarController {
 	
 	
 	@GetMapping("/getAlter")
-	public ResponseEntity<AlterResponse> getAlter(@RequestHeader("patientId") int patientId, @RequestHeader("alertId") int alterId) {
+	public ResponseEntity<AlterResponse> getAlter(@RequestHeader("patientId") int patientId, @RequestHeader("alterId") int alterId) {
 
 		AlterResponse alter = service.getAlterDetails(patientId, alterId);
 
