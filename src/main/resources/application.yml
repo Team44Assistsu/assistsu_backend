@@ -2,11 +2,14 @@ server:
   port: 8081
 spring:
   datasource:
-    url: jdbc:sqlserver://DURGASRAVANI;databaseName=Assists-u;trustServerCertificate=true
+    url: jdbc:h2:mem:mydb
     username: sa
-    password: Ask@6156
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    password: password
+    driverClassName: org.h2.Driver
   jpa:
-    database-platform: org.hibernate.dialect.SQLServerDialect
+    database-platform: org.hibernate.dialect.H2Dialect
   application:
     name: didpatients
+  h2:
+    console:
+      enabled: true
