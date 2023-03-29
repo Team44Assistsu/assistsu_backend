@@ -22,6 +22,9 @@ public class Login {
 
 	@Column(name = "PASSWORD")
 	String password;
+	
+	@Column(name = "EMAIL")
+	String email;
 
 	@OneToOne(mappedBy="login")
     Patient patient;
@@ -78,5 +81,13 @@ public class Login {
 
 	public void setNewLogin(boolean newLogin) {
 		this.newLogin = newLogin;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

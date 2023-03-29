@@ -37,7 +37,7 @@ public class TherapistService {
 		if (!isUserExisting) {
 			Login login = new Login();
 			login.setPassword(request.getPassword());
-			login.setUserName(request.getUserName());
+			login.setEmail(request.getUserName());
 			login.setNewLogin(false);
 			login = loginDao.save(login);
 
@@ -65,7 +65,7 @@ public class TherapistService {
 	}
 
 	private boolean validateUser(TherapistRequest request) {
-		Login login = loginDao.findByUserName(request.getUserName());
+		Login login = loginDao.findByEmail(request.getUserName());
 		if (login != null) {
 			return true;
 		}
@@ -86,7 +86,7 @@ public class TherapistService {
 					patientResponse.setGender(patientDomain.get().getGender());
 					patientResponse.setMobileNo(patientDomain.get().getMobileNo());
 					patientResponse.setPatientName(patientDomain.get().getPatientName());
-					patientResponse.setUserName(patientDomain.get().getLogin().getUserName());
+					patientResponse.setUserName(patientDomain.get().getLogin().getEmail());
 					patientResponse.setPatientId(patientDomain.get().getPatientId());
 					patientResponses.add(patientResponse);
 				}

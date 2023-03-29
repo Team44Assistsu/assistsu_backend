@@ -27,8 +27,7 @@ public class PatientService {
 
 		if (!isUserExisting) {
 			Login login = new Login();
-			login.setPassword(request.getPassword());
-			login.setUserName(request.getUserName());
+			login.setEmail(request.getEmail());
 			login.setNewLogin(false);
 			login = loginDao.save(login);
 			Patient patient = new Patient();
@@ -42,12 +41,12 @@ public class PatientService {
 			PatientResponse response = this.prepareResponse(patient);
 			return new ResponseEntity<>(response, HttpStatusCode.valueOf(201));
 		} else {
-			return new ResponseEntity<>("User Id already exists" , HttpStatusCode.valueOf(500));
+			return new ResponseEntity<>("Email already registered", HttpStatusCode.valueOf(500));
 		}
 	}
 
 	private boolean validateUser(PatientRequest request) {
-		Login login = loginDao.findByUserName(request.getUserName());
+		Login login = loginDao.findByEmail(request.getEmail());
 		if (login != null) {
 			return true;
 		}
@@ -63,7 +62,7 @@ public class PatientService {
 		response.setEmail(patient.getEmail());
 		response.setMobileNo(patient.getMobileNo());
 		response.setLoginId(patient.getLogin().getLoginId());
-		response.setUserName(patient.getLogin().getUserName());
+		response.setUserName(patient.getLogin().getEmail());
 		return response;
 	}
 
@@ -73,7 +72,7 @@ public class PatientService {
 			PatientResponse patientResponse = this.prepareResponse(patient);
 			int profImgKey = patient.getAlters().stream().filter(alter -> alter.isHost()).findFirst().get()
 					.getProfImgKey();
-			if(profImgKey != 0) {
+			if (profImgKey != 0) {
 				patientResponse.setProfImgKey(profImgKey);
 			}
 			return new ResponseEntity<>(patientResponse, HttpStatusCode.valueOf(200));

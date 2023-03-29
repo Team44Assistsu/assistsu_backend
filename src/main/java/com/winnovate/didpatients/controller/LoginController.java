@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.winnovate.didpatients.model.AlterLoginRequest;
@@ -28,4 +29,14 @@ public class LoginController {
 	public ResponseEntity<LoginResponse> login(@RequestBody AlterLoginRequest alterLoginRequest) {
 		return loginService.validateAlter(alterLoginRequest);
 	}
+	
+	@PostMapping("/sendOTP")
+	public ResponseEntity<?> sendOTP(@RequestHeader("toEmail") String toEmail) {
+		return loginService.sendOTP(toEmail);
+	}
+	
+//	@PostMapping("/validateOTP")
+//	public ResponseEntity<LoginResponse> validateOTP(@RequestBody LoginRequest loginRequest) {
+//		return loginService.validateOTP(loginRequest);
+//	}
 }

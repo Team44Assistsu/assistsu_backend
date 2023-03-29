@@ -8,8 +8,6 @@ public class PatientRequest {
 
 	private String description;
 
-	private String password;
-
 	private String userName;
 	
 	private String gender;
@@ -41,15 +39,7 @@ public class PatientRequest {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	
 	public String getUserName() {
 		return userName;
 	}
