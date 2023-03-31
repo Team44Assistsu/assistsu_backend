@@ -71,7 +71,7 @@ public class LoginService {
 				}
 			} else {
 				response.setValid(false);
-				response.setLoginStatus("OTP is generated");
+				response.setLoginStatus("OTP is not generated");
 				return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
 			}
 		} else {
