@@ -1,6 +1,8 @@
 package com.winnovate.didpatients.service;
 
 import java.security.SecureRandom;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,21 +47,33 @@ public class LoginService {
 		Login login = loginDao.findByEmail(loginRequest.getEmail());
 		LoginResponse response = new LoginResponse();
 		if (login != null) {
-			if (login.getPassword().equals(loginRequest.getPassword())) {
-				response.setValid(true);
-				response.setLoginStatus("successfully logged in");
-				if (login.getPatient() != null) {
-					response.setPatientId(login.getPatient().getPatientId());
+			if (login.getOtpCreatedDt() != null) {
+				long duration = Duration.between(login.getOtpCreatedDt(), LocalDateTime.now()).toSeconds();
+				if (duration < 120) {
+					if (login.getPassword().equals(loginRequest.getPassword())) {
+						response.setValid(true);
+						response.setLoginStatus("successfully logged in");
+						if (login.getPatient() != null) {
+							response.setPatientId(login.getPatient().getPatientId());
+						} else {
+							response.setTherapistId(login.getTherpaist().getTherapistId());
+						}
+						return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
+					} else {
+						response.setValid(false);
+						response.setLoginStatus("Invalid OTP");
+						return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
+					} 
 				} else {
-					response.setTherapistId(login.getTherpaist().getTherapistId());
+					response.setValid(false);
+					response.setLoginStatus("OTP is expired");
+					return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
 				}
-				return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
 			} else {
 				response.setValid(false);
-				response.setLoginStatus("Invalid OTP");
+				response.setLoginStatus("OTP is generated");
 				return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
 			}
-
 		} else {
 			response.setValid(false);
 			response.setLoginStatus("Email not registered.");
@@ -96,6 +110,7 @@ public class LoginService {
 
 		if (patient != null) {
 			patient.getLogin().setPassword(randomString);
+			patient.getLogin().setOtpCreatedDt(LocalDateTime.now());
 			canSendMail = true;
 			patientDao.save(patient);
 		}
@@ -103,6 +118,7 @@ public class LoginService {
 		Therapist therapist = therapistDao.findByEmail(toEmail);
 		if (therapist != null) {
 			therapist.getLogin().setPassword(randomString);
+			therapist.getLogin().setOtpCreatedDt(LocalDateTime.now());
 			canSendMail = true;
 			therapistDao.save(therapist);
 		}

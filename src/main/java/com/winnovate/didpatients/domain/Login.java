@@ -1,5 +1,7 @@
 package com.winnovate.didpatients.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,15 +27,15 @@ public class Login {
 	
 	@Column(name = "EMAIL")
 	String email;
+	
+	 @Column(name = "OTP_CREATED_DT")
+	 LocalDateTime otpCreatedDt;
 
 	@OneToOne(mappedBy="login")
     Patient patient;
 	
 	@OneToOne(mappedBy="loginDetails")
     Therapist therpaist;
-	
-	@Column(name = "NEW_LOGIN")
-	boolean newLogin;
 
 	public String getUserName() {
 		return userName;
@@ -75,19 +77,19 @@ public class Login {
 		this.therpaist = therpaist;
 	}
 
-	public boolean isNewLogin() {
-		return newLogin;
-	}
-
-	public void setNewLogin(boolean newLogin) {
-		this.newLogin = newLogin;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public LocalDateTime getOtpCreatedDt() {
+		return otpCreatedDt;
+	}
+
+	public void setOtpCreatedDt(LocalDateTime otpCreatedDt) {
+		this.otpCreatedDt = otpCreatedDt;
 	}
 }

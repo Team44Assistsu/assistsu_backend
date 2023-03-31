@@ -28,7 +28,6 @@ public class PatientService {
 		if (!isUserExisting) {
 			Login login = new Login();
 			login.setEmail(request.getEmail());
-			login.setNewLogin(false);
 			login = loginDao.save(login);
 			Patient patient = new Patient();
 			patient.setPatientName(request.getPatientName());

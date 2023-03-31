@@ -35,7 +35,6 @@ public class PasswordService {
 
 		if (patient != null) {
 			patient.getLogin().setPassword(randomString);
-			patient.getLogin().setNewLogin(true);
 			canSendMail = true;
 			patientDao.save(patient);
 		}
@@ -43,7 +42,6 @@ public class PasswordService {
 		Therapist therapist = therapistDao.findByEmail(toEmail);
 		if (therapist != null) {
 			therapist.getLogin().setPassword(randomString);
-			therapist.getLogin().setNewLogin(true);
 			canSendMail = true;
 			therapistDao.save(therapist);
 		}
