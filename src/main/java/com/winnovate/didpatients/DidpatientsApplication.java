@@ -22,8 +22,8 @@ public class DidpatientsApplication {
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 
-		mailSender.setUsername("avengers.44team@gmail.com");
-		mailSender.setPassword("edefcldqcfaxueqn");
+		mailSender.setUsername("noreply.assistsu@gmail.com");
+		mailSender.setPassword("hyvkvpworackuzij");
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");

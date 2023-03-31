@@ -105,11 +105,11 @@ public class LoginService {
 
 	public ResponseEntity<?> sendOTP(String toEmail) {
 		Patient patient = patientDao.findByEmail(toEmail);
-		String randomString = generateRandomString(16);
+		String otp = generateRandomString(16);
 		boolean canSendMail = false;
 
 		if (patient != null) {
-			patient.getLogin().setPassword(randomString);
+			patient.getLogin().setPassword(otp);
 			patient.getLogin().setOtpCreatedDt(LocalDateTime.now());
 			canSendMail = true;
 			patientDao.save(patient);
@@ -117,14 +117,14 @@ public class LoginService {
 
 		Therapist therapist = therapistDao.findByEmail(toEmail);
 		if (therapist != null) {
-			therapist.getLogin().setPassword(randomString);
+			therapist.getLogin().setPassword(otp);
 			therapist.getLogin().setOtpCreatedDt(LocalDateTime.now());
 			canSendMail = true;
 			therapistDao.save(therapist);
 		}
 
 		if (canSendMail) {
-			service.sendEmail(toEmail, "ASSISTU Login", "Your OTP is :  " + randomString);
+			service.sendOTPEmail(toEmail, otp);
 			return new ResponseEntity<>("OTP has sent to your mail.", HttpStatusCode.valueOf(200));
 		} else {
 			return new ResponseEntity<>("Email does not exists.", HttpStatusCode.valueOf(200));
