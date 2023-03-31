@@ -36,9 +36,7 @@ public class TherapistService {
 
 		if (!isUserExisting) {
 			Login login = new Login();
-			login.setPassword(request.getPassword());
 			login.setEmail(request.getUserName());
-			login.setNewLogin(false);
 			login = loginDao.save(login);
 
 			Therapist therapist = new Therapist();
@@ -52,7 +50,8 @@ public class TherapistService {
 			TherapistResponse response = this.prepareResponse(therapist);
 			return new ResponseEntity<>(response, HttpStatusCode.valueOf(201));
 		} else {
-			return new ResponseEntity<>("User Id already exists", HttpStatusCode.valueOf(500));
+			return new ResponseEntity<>(""
+					+ "Email Id already exists", HttpStatusCode.valueOf(500));
 		}
 	}
 
@@ -65,7 +64,7 @@ public class TherapistService {
 	}
 
 	private boolean validateUser(TherapistRequest request) {
-		Login login = loginDao.findByEmail(request.getUserName());
+		Login login = loginDao.findByEmail(request.getEmail());
 		if (login != null) {
 			return true;
 		}

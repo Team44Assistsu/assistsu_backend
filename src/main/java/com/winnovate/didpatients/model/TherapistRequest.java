@@ -4,8 +4,6 @@ public class TherapistRequest {
 	
 	private String therapistName;
 
-	private String password;
-
 	private String userName;
 	
 	private String mobileNumber;
@@ -18,14 +16,6 @@ public class TherapistRequest {
 
 	public void setTherapistName(String therapistName) {
 		this.therapistName = therapistName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getUserName() {
