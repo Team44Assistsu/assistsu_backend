@@ -3,8 +3,6 @@ package com.winnovate.didpatients.model;
 public class TherapistRequest {
 	
 	private String therapistName;
-
-	private String userName;
 	
 	private String mobileNumber;
 	
@@ -16,14 +14,6 @@ public class TherapistRequest {
 
 	public void setTherapistName(String therapistName) {
 		this.therapistName = therapistName;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getMobileNumber() {

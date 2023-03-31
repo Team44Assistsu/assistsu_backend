@@ -7,8 +7,6 @@ public class PatientRequest {
 	private int patientAge;
 
 	private String description;
-
-	private String userName;
 	
 	private String gender;
 	
@@ -40,14 +38,6 @@ public class PatientRequest {
 		this.description = description;
 	}
 	
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public String getGender() {
 		return gender;
 	}

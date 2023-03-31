@@ -34,9 +34,4 @@ public class LoginController {
 	public ResponseEntity<?> sendOTP(@RequestHeader("toEmail") String toEmail) {
 		return loginService.sendOTP(toEmail);
 	}
-	
-//	@PostMapping("/validateOTP")
-//	public ResponseEntity<LoginResponse> validateOTP(@RequestBody LoginRequest loginRequest) {
-//		return loginService.validateOTP(loginRequest);
-//	}
 }

@@ -36,7 +36,7 @@ public class TherapistService {
 
 		if (!isUserExisting) {
 			Login login = new Login();
-			login.setEmail(request.getUserName());
+			login.setEmail(request.getEmail());
 			login = loginDao.save(login);
 
 			Therapist therapist = new Therapist();

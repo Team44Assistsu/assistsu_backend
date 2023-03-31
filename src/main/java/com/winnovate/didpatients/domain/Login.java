@@ -19,9 +19,6 @@ public class Login {
 	@Column(name = "LOGINID")
 	Integer loginId;
 
-	@Column(name = "USERNAME")
-	String userName;
-
 	@Column(name = "PASSWORD")
 	String password;
 	
@@ -36,14 +33,6 @@ public class Login {
 	
 	@OneToOne(mappedBy="loginDetails")
     Therapist therpaist;
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public String getPassword() {
 		return password;
