@@ -8,7 +8,13 @@ import com.winnovate.didpatients.domain.Patient;
 @Repository
 public interface PatientDao extends JpaRepository<Patient, Integer>{
 
+	/*
+	 * This method returns a Patient entity with the given patientId.
+	 */
 	Patient findByPatientId(int patientId);
 	
+	/*
+	 * This method returns a Patient entity with the given email address.
+	 */
 	Patient findByEmail(String email);
 }

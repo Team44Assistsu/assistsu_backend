@@ -10,7 +10,13 @@ public class EmailSenderService {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
+	 /**
+	  * Sends an email to the specified recipient with the given subject and body
+	  * 
+	  * @param toEmail The email address of the recipient
+	  * @param subject The subject of the email
+	  * @param body The body of the email
+	  */
 	public void sendEmail(String toEmail, String subject, String body) {
 
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -21,7 +27,13 @@ public class EmailSenderService {
 
 		mailSender.send(message);
 	}
-
+	
+	/**
+	 * Sends an email containing an OTP to the specified recipient
+	 * 
+	 * @param toEmail The email address of the recipient
+	 * @param OTP The One-Time Password to be sent in the email
+	 */
 	public void sendOTPEmail(String toEmail, String OTP) {
 		String subject = "Your One-Time Password for Login";
 		String body = "We have received a request to log in to your account. we require that you enter a One-Time Password (OTP) to complete the login process.\n"

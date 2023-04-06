@@ -30,20 +30,25 @@ public class MessageService {
 	@Autowired
 	MessageReceiversDao messageReceiversDao;
 
+	// Sends a message from a sender to a list of recipients
 	public MessageResponse sendMessage(MessageRequest request) {
 
 		MessageResponse response = new MessageResponse();
 
+		// Get the sender of the message
 		Optional<Alter> fromAlter = alterDao.findById(request.getFrom());
 
+		// Check if the sender is valid
 		if (fromAlter.isPresent()) {
 
+			// Create a message object and set its properties
 			Message message = new Message();
 			message.setFrom(fromAlter.get());
 			message.setText(request.getText());
 			message.setDate(new Date(new java.util.Date().getTime()));
 			message = messageDao.save(message);
 
+			// Set the response object's properties
 			response.setMsgFrom(this.prepareAlterResponse(fromAlter.get()));
 			response.setMsgId(message.getMessageId());
 			response.setMsgText(message.getText());
@@ -52,6 +57,8 @@ public class MessageService {
 			List<MessageReceivers> receivers = new ArrayList<>();
 			List<Alter> toAlters = new ArrayList<>();
 
+			// Get the list of recipients and create a message receiver object for each of
+			// them
 			for (Integer receviersId : request.getRecevierIds()) {
 				Optional<Alter> toAlter = alterDao.findById(receviersId);
 				MessageReceivers receiver = new MessageReceivers();
@@ -67,9 +74,11 @@ public class MessageService {
 			response.setMsgTo(prepareAlterResponse(toAlters));
 			messageReceiversDao.saveAll(receivers);
 		}
+
 		return response;
 	}
 
+	// Prepare the AlterResponse object
 	AlterResponse prepareAlterResponse(Alter alter) {
 		AlterResponse response = new AlterResponse();
 		response.setAlterId(alter.getAlterId());
@@ -81,6 +90,7 @@ public class MessageService {
 		return response;
 	}
 
+	// Prepare the list of AlterResponse objects
 	List<AlterResponse> prepareAlterResponse(List<Alter> alters) {
 		List<AlterResponse> alterResponses = new ArrayList<>();
 
@@ -97,6 +107,13 @@ public class MessageService {
 		return alterResponses;
 	}
 
+	/**
+	 * This method retrieves all messages for a given receiver.
+	 * 
+	 * @param receiverId The ID of the Alter that the messages should be retrieved
+	 *                   for.
+	 * @return A list of Message objects for the given receiver.
+	 */
 	public List<com.winnovate.didpatients.response.Message> getAllMessages(Integer receiverId) {
 		Optional<Alter> alter = alterDao.findById(receiverId);
 		List<com.winnovate.didpatients.response.Message> messages = new ArrayList<>();
@@ -127,6 +144,14 @@ public class MessageService {
 		return messages;
 	}
 
+	/**
+	 * This method retrieves a specific message for a given Alter.
+	 * 
+	 * @param messageId The ID of the message to be retrieved.
+	 * @param alterId   The ID of the Alter that the message should be retrieved
+	 *                  for.
+	 * @return A Message object containing the requested message data.
+	 */
 	public com.winnovate.didpatients.response.Message viewMessage(Integer messageId, Integer alterId) {
 
 		com.winnovate.didpatients.response.Message message = new com.winnovate.didpatients.response.Message();

@@ -19,14 +19,16 @@ public class TherapistController {
 	@Autowired
 	TherapistService service;
 
+	// API to create a new therapist account
 	@PostMapping("/saveTherapist")
 	public ResponseEntity<Object> createPatientAccount(@RequestBody TherapistRequest request) {
 		ResponseEntity<Object> response = service.saveTherapist(request);
 		return response;
 	}
 	
+	// API to get all patients for a given therapist
 	@GetMapping("/getPatients")
-	public ResponseEntity<Object> getPatientDetails(@RequestHeader("therapistId") int patientId){
-		return service.getPatientDetails(patientId);
+	public ResponseEntity<Object> getPatientDetails(@RequestHeader("therapistId") int therapistId){
+		return service.getPatientDetails(therapistId);
 	}
 }

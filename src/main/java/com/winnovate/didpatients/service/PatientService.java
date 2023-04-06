@@ -21,6 +21,16 @@ public class PatientService {
 	@Autowired
 	LoginDao loginDao;
 
+	/**
+	 * This method is used to save patient details. It validates whether the user is
+	 * already registered or not. If the user is not registered, it saves the
+	 * patient details and returns a response with HTTP status code 201. If the user
+	 * is already registered, it returns a response with HTTP status code 500.
+	 *
+	 * @param request a PatientRequest object containing patient details
+	 * @return a ResponseEntity object containing a PatientResponse object and HTTP
+	 *         status code
+	 */
 	public ResponseEntity<Object> savePatient(PatientRequest request) {
 
 		boolean isUserExisting = this.validateUser(request);
@@ -44,6 +54,15 @@ public class PatientService {
 		}
 	}
 
+	/**
+	 * This method is used to validate whether the user is already registered or
+	 * not.
+	 *
+	 * @param request a PatientRequest object containing patient details
+	 * @return a boolean value indicating whether the user is already registered or
+	 *         not
+	 */
+
 	private boolean validateUser(PatientRequest request) {
 		Login login = loginDao.findByEmail(request.getEmail());
 		if (login != null) {
@@ -52,6 +71,12 @@ public class PatientService {
 		return false;
 	}
 
+	/**
+	 * This method is used to prepare a PatientResponse object from the given Patient object.
+	 *
+	 * @param patient a Patient object containing patient details
+	 * @return a PatientResponse object containing patient details
+	 */
 	private PatientResponse prepareResponse(Patient patient) {
 		PatientResponse response = new PatientResponse();
 		response.setPatientId(patient.getPatientId());

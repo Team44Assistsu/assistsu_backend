@@ -16,6 +16,7 @@ public class PasswordController {
 	@Autowired
 	PasswordService service;
 
+	// This API is used to reset the password of the user
 	@PostMapping("/resetPassword")
 	public ResponseEntity<String> resetPassword(@RequestHeader("toEmail") String toEmail) {
 		return service.resetPassword(toEmail);

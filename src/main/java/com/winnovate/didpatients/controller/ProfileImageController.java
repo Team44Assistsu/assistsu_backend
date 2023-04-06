@@ -24,12 +24,24 @@ public class ProfileImageController {
 	@Autowired
 	ProfileImageService service;
 
+	/**
+	 * This method returns a list of all profile images stored in the database.
+	 * 
+	 * @return ResponseEntity<List<ProfileImage>> The HTTP response containing a list of ProfileImage objects.
+	 */
 	@GetMapping("/get_profile_images")
 	@ResponseBody
 	public ResponseEntity<List<ProfileImage>> getProfileImages() {
 		return ResponseEntity.ok().body(service.getProfileImages());
 	}
 
+	/**
+	 * This method retrieves the binary data of a specific profile image stored in the server's file system.
+	 * 
+	 * @param imageId The ID of the profile image to retrieve.
+	 * @return ResponseEntity<InputStream> The HTTP response containing the binary data of the image in the response body.
+	 * @throws IOException If there is an error accessing the server's file system to read the image file.
+	 */
 	@GetMapping("/get_profile_image")
 	@ResponseBody
 	public ResponseEntity<InputStream> getImageDynamicType(@RequestParam("image_id") int imageId) throws IOException {

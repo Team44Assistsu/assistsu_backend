@@ -31,6 +31,12 @@ public class TherapistService {
 	@Autowired
 	PatientDao patientDao;
 
+	/*
+	 * This method saves a new therapist in the database.
+	 * It first checks if a user with the provided email id already exists.
+	 * If it doesn't, then it creates a new login and therapist record and returns a response object.
+	 * If it does, then it returns an error response.
+	 */
 	public ResponseEntity<Object> saveTherapist(TherapistRequest request) {
 		boolean isUserExisting = this.validateUser(request);
 
@@ -55,6 +61,10 @@ public class TherapistService {
 		}
 	}
 
+	/*
+	 * This method prepares a response object from the therapist domain object.
+	 */
+
 	private TherapistResponse prepareResponse(Therapist therapist) {
 		TherapistResponse response = new TherapistResponse();
 		response.setEmail(therapist.getEmail());
@@ -63,6 +73,9 @@ public class TherapistService {
 		return response;
 	}
 
+	/*
+	 * This method checks if a user with the provided email id already exists in the database.
+	 */
 	private boolean validateUser(TherapistRequest request) {
 		Login login = loginDao.findByEmail(request.getEmail());
 		if (login != null) {
@@ -71,6 +84,9 @@ public class TherapistService {
 		return false;
 	}
 
+	/*
+	 * This method retrieves all patients associated with a particular therapist from the database.
+	 */
 	public ResponseEntity<Object> getPatientDetails(int therapistId) {
 		TherapistResponse response = new TherapistResponse();
 		List<PatientResponse> patientResponses = new ArrayList<>();

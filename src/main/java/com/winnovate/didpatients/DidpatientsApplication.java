@@ -4,7 +4,6 @@ import java.util.Properties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -16,6 +15,11 @@ public class DidpatientsApplication {
 		SpringApplication.run(DidpatientsApplication.class, args);
 	}
 
+	/**
+	 * A bean that returns an instance of the JavaMailSender to send emails.
+	 * 
+	 * @return The JavaMailSender instance.
+	 */
 	@Bean
 	public JavaMailSender getJavaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

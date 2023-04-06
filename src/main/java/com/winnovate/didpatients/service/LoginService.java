@@ -42,6 +42,16 @@ public class LoginService {
 	@Autowired
 	TherapistDao therapistDao;
 
+	/**
+	 * Validates the login request of the user. If the email is registered and the
+	 * OTP is not expired, the user can log in. If the password is correct and the
+	 * user is a patient or a therapist, a success response with patient/therapist
+	 * ID is returned. Otherwise, an error response is returned.
+	 *
+	 * @param loginRequest the login request containing the email and password
+	 * @return a response entity with the login status and patient/therapist ID, if
+	 *         successful.
+	 */
 	public ResponseEntity<LoginResponse> validateUser(LoginRequest loginRequest) {
 
 		Login login = loginDao.findByEmail(loginRequest.getEmail());
@@ -63,7 +73,7 @@ public class LoginService {
 						response.setValid(false);
 						response.setLoginStatus("Invalid OTP");
 						return new ResponseEntity<>(response, HttpStatusCode.valueOf(401));
-					} 
+					}
 				} else {
 					response.setValid(false);
 					response.setLoginStatus("OTP is expired");
@@ -81,6 +91,19 @@ public class LoginService {
 		}
 	}
 
+	/**
+	 * This method validates an alter login request by checking if the given alter
+	 * id and pin match the record in the Alter table. If the validation succeeds, a
+	 * LoginResponse object with the status message "alter successfully logged in"
+	 * is returned with HTTP 200 status. If the validation fails due to an invalid
+	 * alter id or incorrect pin, a LoginResponse object with the status message
+	 * "Invalid alter" or "Invalid alter pin" is returned with HTTP 401 status.
+	 *
+	 * @param alterLoginRequest An object containing the alter id and pin to be
+	 *                          validated.
+	 * @return A ResponseEntity object containing a LoginResponse object and an HTTP
+	 *         status code indicating the result of the validation.
+	 */
 	public ResponseEntity<LoginResponse> validateAlter(AlterLoginRequest alterLoginRequest) {
 		Optional<Alter> alter = alterDao.findById(alterLoginRequest.getAlterId());
 		LoginResponse response = new LoginResponse();
@@ -103,6 +126,13 @@ public class LoginService {
 		}
 	}
 
+	/**
+	 * Sends an OTP (One Time Password) to the specified email address.
+	 * 
+	 * @param toEmail the email address to send the OTP to
+	 * @return a ResponseEntity containing a message indicating if the OTP was sent
+	 *         or if the email does not exist
+	 */
 	public ResponseEntity<?> sendOTP(String toEmail) {
 		Patient patient = patientDao.findByEmail(toEmail);
 		String otp = generateRandomString(16);
@@ -131,6 +161,14 @@ public class LoginService {
 		}
 	}
 
+	/**
+	 * This method generates a random string of specified length and returns it. The
+	 * generated string can contain upper and lowercase letters, digits, and special
+	 * characters.
+	 *
+	 * @param length The length of the random string to be generated.
+	 * @return A random string of specified length.
+	 */
 	public static String generateRandomString(int length) {
 		SecureRandom random = new SecureRandom();
 		StringBuilder sb = new StringBuilder(length);
